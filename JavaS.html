@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<body>
+    <script>
+    let livrosTerror = [];
+
+    let livrosFiccao = [];
+    function cadastrar(livros) {
+        alert("Cadastrar");
+        let nome = prompt("Nome do livro:");
+        let autor = prompt("Nome do autor:");
+        let ano = parseInt(prompt("Ano de lançamento:"));
+        let livro = {
+            nome: nome,
+            autor: autor,
+            ano: ano
+        };
+        livros.push(livro);
+    
+    }
+    function calcularIdade(ano) {
+        let idade = new Date().getFullYear() - ano;
+        return idade
+    }
+    function listar(livros) {
+        alert("Listar");
+        let id = 0
+        let mensagem = '';
+        for (livro of livros) {
+            let idade = calcularIdade(livro.ano);
+            mensagem += id + ". " + livro['nome'] + ' - ' + livro.autor + ' - '
+            + livro.ano + " - " + "Publicado a " + idade + '\n';
+            id = id + 1;
+        }
+        alert(mensagem);              
+    }
+    function editar(livros) {
+        listar()
+        let id = parseInt(prompt("Digite o ID que deseja editar: "))
+        let livro = livros[id]
+        let nome = prompt(`Nome do livro: [${livro.nome}]`);
+        if (nome == ''){
+            nome = livro.nome
+        }
+        let autor = prompt(`Nome do autor: [${livro.autor}]`);
+        if (autor == ''){
+            autor = livro.autor
+        }
+        let ano = prompt(`Ano de lançamento: [${livro.ano}]`);
+        if (ano == ''){
+            ano = livro.ano
+        }
+        let livroNovo = {
+            nome: nome,
+            autor: autor,
+            ano: ano
+        };
+        livros[id] = livroNovo
+    }
+    function apagar(livros) {
+        listar();
+        let id = parseInt(prompt("Digite o ID que deseja apagar: "))
+        livros.splice(id, 1)
+        
+    }
+   
+    loop:
+        while (true){
+            alert("1- Cadastrar Ficção\n2- Listar Ficção\n3- Editar Ficção\n4- Apagar Ficção\n5- Cadastrar Terror\n6- Listar Terror\n7- Editar Terror\n8- Apagar Terror\n9- Sair");
+            numero = prompt('Digite um número: ');
+            switch(numero){
+                case "1":
+                    cadastrar(livrosFiccao);
+                    break
+                case "2":
+                    listar(livrosFiccao);
+                    break
+                case "3":
+                    editar(livrosFiccao);
+                    break
+                case "4":
+                    apagar(livrosFiccao);
+                    break
+                case "5":
+                    cadastrar(livrosTerror);
+                    break
+                case "6":
+                    listar(livrosTerror);
+                    break
+                case "7":
+                    editar(livrosTerror);
+                    break
+                case "8":
+                    apagar(livrosTerror);
+                    break
+                case "9":
+                    alert("Sair");
+                    break loop;
+            }
+
+        }
+
+        
+    </script>
+</body>
+</html>
